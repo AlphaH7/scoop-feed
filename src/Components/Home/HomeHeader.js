@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function HomeHeader(props) {
-   console.log(props);
    return (
-        <div className="highlights-ctr">
+        <div className={"highlights-ctr " + props.ctrCls}>
         <div className="category-bg"/>
         <div style={{backgroundImage: "url(" + props.featuredFeed.image + ")"}} className="featured-banner-ctr">
          <div className="featured-overlay">

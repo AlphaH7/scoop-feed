@@ -16,16 +16,15 @@ export default class App extends React.Component {
       var ui = null;
       switch(this.state.viewState) {
                   case 2:
-                      ui = (<Home viewState={this.state.viewState}/>);
+                      ui = (<Home updateViewState={this.updateViewState} viewState={this.state.viewState}/>);
                       break;
                   default:
-                      ui = (<Home viewState={this.state.viewState}/>);
+                      ui = (<Home updateViewState={this.updateViewState} viewState={this.state.viewState}/>);
      }
      return ui;
   }
 
   updateViewState(viewState) {
-    console.log(viewState);
     this.setState({
       viewState: viewState
     });

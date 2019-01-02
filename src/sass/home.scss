@@ -13,6 +13,16 @@
   .highlights-ctr{
     min-height: 200px;
     position: relative;
+    transform: scale3d(1,1,1);
+    transition: all 0.5s;
+    width: 100%;
+    opacity: 1;
+    &.hide{
+      transform: scale3d(0,1,1);
+      opacity: 0;
+      min-height: 0px;
+      width: 0%;
+    }
     .featured-banner-ctr{
       background-position: center;
       background-size: cover;
@@ -48,51 +58,102 @@
       background-color: rgb(250,250,250);
     }
   }
-  .feed-category-ctr{
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    height: fit-content;
-    position: relative;
-    .category-bg{
-      position: absolute;
-      height: 100%;
-      width: 50px;
-      background-color: rgb(250,250,250);
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-direction: column;
-      padding: 15px 0;
-      // border-bottom: 1px solid #efefef;
-    }
-    .category-name-ctr{
-      width: 45px;
-      position: sticky;
-      // height: 100%;
+  .feed-ctr{
+    .feed-detail-ctr{
+      position: fixed;
       top: 60px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      background-color: rgb(250,250,250);
-      .category-name{
-        text-transform: uppercase;
-        min-width: max-content;
-        transform: rotate(270deg) translateX(-50%);
-        width: max-content;
-        padding: 0 15px;
-        background-color: rgb(250,250,250);
+      height: calc(100% - 60px);
+      width: 100%;
+      z-index: 4;
+      background-color: #fafafa;
+      transition: all 0.5s;
+      .back-icon-ctr{
+        .app-icon{
+          fill: #333;
+        }
+        display: flex;
+        color: #333;
+        padding: 13px 3px 11px;
+        background: linear-gradient(180deg, #f0f0f0 0px, rgba(240, 240, 240, 0) 40px);
+      }
+      &.hide{
+        transform: translateX(100%);
+      }
+      .feed-detail{
+        .feed-image{
+          height: 250px;
+          width: 100%;
+          background-position: center;
+          background-size: cover;
+        }
+        .feed-title{
+          text-transform: uppercase;
+          font-size: 1.25rem;
+          padding: 10px 10px 5px;
+        }
+        .feed-tag-ctr{
+          padding: 0 10px 10px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .feed-description{
+          padding: 0 10px;
+        }
       }
     }
-    .feed-list-ctr{
-      width: calc(100% - 70px);
-      // height: 100%;
-      overflow: auto;
-      border-bottom: 1px solid #e5e5e5;
-      margin: 0 10px;
-      padding: 10px 0;
+    .feed-category-ctr{
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      height: fit-content;
+      position: relative;
+      transition: all 0.5s;
+      opacity: 1;
+      &.hide{
+        transform: translateX(-100%);
+        opacity: 0
+      }
+      .category-bg{
+        position: absolute;
+        height: 100%;
+        width: 50px;
+        background-color: rgb(250,250,250);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: column;
+        padding: 15px 0;
+        // border-bottom: 1px solid #efefef;
+      }
+      .category-name-ctr{
+        width: 45px;
+        position: sticky;
+        // height: 100%;
+        top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: rgb(250,250,250);
+        .category-name{
+          text-transform: uppercase;
+          min-width: max-content;
+          transform: rotate(270deg) translateX(-50%);
+          width: max-content;
+          padding: 0 15px;
+          background-color: rgb(250,250,250);
+        }
+      }
+      .feed-list-ctr{
+        width: calc(100% - 70px);
+        // height: 100%;
+        overflow: auto;
+        border-bottom: 1px solid #e5e5e5;
+        margin: 0 10px;
+        padding: 10px 0;
+      }
     }
   }
   .feed-element-ctr{
