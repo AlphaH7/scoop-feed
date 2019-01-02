@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Loader from '../CoreComponents/Loader';
 import FeedElement from './FeedElement';
+import HomeHeader from './HomeHeader';
+import Branding from '../Branding/Branding';
 import Constants from '../../core-utils/Constants'
 import AppHelper from '../../core-utils/AppHelpers'
 
@@ -36,8 +38,9 @@ export default class Home extends React.Component {
   render() {
     var feedData = AppHelper.groupBy(this.state.articles, function(item){
       return [item.tags];
-    });
-    console.log(this.state.articles[Math.floor(Math.random() * (this.state.articles.length + 1))] , Math.floor(Math.random() * (this.state.articles.length + 1)));
+    }),
+    featuredFeed = this.state.articles[Math.floor((Math.random() * (this.state.articles.length - 1)) + 1)];
+    console.log(featuredFeed);
     return (<div className="home-ctr">
               {
                 this.state.viewState === 0 ? (
@@ -46,13 +49,11 @@ export default class Home extends React.Component {
                     {"Loading Your Feed"}
                   </div>
                 ) : (
-                  [
-                    (<div className="highlights-ctr">
-                      <div className="category-bg"/>
-                    </div>),
+                  [ (<Branding key={"home-element-0"}/>),
+                    (this.props.viewState === 1 ? <HomeHeader key={"home-element-1"} featuredFeed={featuredFeed} /> : null),
                     (feedData.map(
                       (data) => (
-                        <div className="feed-category-ctr" key={"feed-category-element-" + data.key}>
+                        <div key={"home-element-2"} className="feed-category-ctr" key={"feed-category-element-" + data.key}>
                           <div className="category-bg">
                             <div>{"•"}</div>
                             <div>{"•"}</div>

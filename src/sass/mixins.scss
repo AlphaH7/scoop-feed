@@ -1,0 +1,20 @@
+// @mixin transform($property , $value) {
+//   -webkit-$property: $value;
+//   -ms-$property: $value;
+//   $property: $value;
+// }
+
+@mixin truncate-text() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin multiline-ellipsis($value) {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: $value;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

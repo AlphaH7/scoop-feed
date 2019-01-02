@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function FeedElement(props) {
-   console.log(props);
    return (
     <div className="feed-element-ctr">
       <div className="info-ctr">

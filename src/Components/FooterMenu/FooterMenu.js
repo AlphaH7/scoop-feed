@@ -25,8 +25,10 @@ export default function FooterMenu(props) {
       <div className={"foot-wrapper " + (props.viewState === 4 ? "hide" : "")}>
         {
           tabs.map((data) => (
-              <div className="tab-ctr" key={"tab-" + data.id} onClick={props.updateViewState.bind(this, data.id)}>
-                <AppIcons iconCls={data.tabIcon}/>
+              <div className={"tab-ctr " + (props.viewState === data.id ? "active" : "")} key={"tab-" + data.id} onClick={props.updateViewState.bind(this, data.id)}>
+                <div className="icon-ctr">
+                  <AppIcons iconCls={data.tabIcon}/>
+                </div>
               </div>
             )
           )

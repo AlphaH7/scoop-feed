@@ -15,11 +15,11 @@ export default class App extends React.Component {
   renderUI() {
       var ui = null;
       switch(this.state.viewState) {
-                  case 1:
-                      ui = (<Home />);
+                  case 2:
+                      ui = (<Home viewState={this.state.viewState}/>);
                       break;
                   default:
-                      ui = (<div>{"default"}</div>);
+                      ui = (<Home viewState={this.state.viewState}/>);
      }
      return ui;
   }
