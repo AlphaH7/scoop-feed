@@ -1,0 +1,14 @@
+import React from 'react';
+
+export default function FeedElement(props) {
+   console.log(props);
+   return (
+    <div className="feed-element-ctr">
+      <div className="info-ctr">
+        <div className="feed-title">{props.title}</div>
+        <div className="feed-date">{props.created_at}</div>
+      </div>
+      <div style={{backgroundImage: "url(" + props.image + ")"}} className='feed-image'/>
+    </div>
+   )
+}
