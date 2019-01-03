@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function HomeHeader(props) {
    return (
-        <div className={"highlights-ctr " + props.ctrCls}>
+        <div className={"highlights-ctr " + props.ctrCls} onClick={props.onClick}>
         <div className="category-bg"/>
         <div style={{backgroundImage: "url(" + props.featuredFeed.image + ")"}} className="featured-banner-ctr">
          <div className="featured-overlay">

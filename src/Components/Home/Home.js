@@ -39,7 +39,7 @@ export default class Home extends React.Component {
     this.props.updateViewState(viewState);
     setTimeout(this.setState({
       selectedArticle: selectedFeed
-    }), ((0.75 + (this.state.articles.length * 0.05)) * 1000))
+    }), ((1 + (this.state.articles.length * 0.05)) * 1000))
   }
 
   renderFeedData(feedData) {
@@ -95,7 +95,7 @@ export default class Home extends React.Component {
                   </div>
                 ) : (
                   [ (<Branding key={"home-element-0"}/>),
-                    ((this.props.viewState === 1 ||this.props.viewState === 4) ? <HomeHeader ctrCls={this.props.viewState === 4 ? "hide" : ""} key={"home-element-1"} featuredFeed={featuredFeed} /> : null),
+                    ((this.props.viewState === 1 ||this.props.viewState === 4) ? <HomeHeader onClick={this.selectFeed.bind(this, featuredFeed, 4)} ctrCls={this.props.viewState === 4 ? "hide" : ""} key={"home-element-1"} featuredFeed={featuredFeed} /> : null),
                     (this.renderFeedData(feedData))
                   ]
                 )
