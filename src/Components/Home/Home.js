@@ -73,33 +73,48 @@ export default class Home extends React.Component {
   }
 
   renderFeedData(feedData) {
+      var feedNodes = [];
+
+      feedData.forEach(
+          (data , index) => {
+            var filteredFeedData = data.value.filter((info)=>(
+              this.props.viewState === 2 ? info.liked : true
+            ));
+            if(this.props.viewState === 1 || (this.props.viewState === 2 && filteredFeedData.length !== 0)){
+              feedNodes.push( <div style={{transitionDelay: ((0.25 + (0.05 * index)) + "s")}} key={"home-element-2"} className={"feed-category-ctr " + (this.props.viewState === 1 || this.props.viewState === 2 ? "" : "hide")} key={"feed-category-element-" + data.key}>
+                        <div className="category-bg">
+                          <div>{"•"}</div>
+                          <div>{"•"}</div>
+                          <div>{"•"}</div>
+                        </div>
+                        <div className="category-name-ctr">
+                          <div className="category-name">{data.key.split("'")[1]}</div>
+                        </div>
+                        <div className="feed-list-ctr">
+                          {
+                            filteredFeedData.map(
+                              (feedData) => (
+                                <FeedElement onLike={this.onLike.bind(this, feedData)} onClick={this.selectFeed.bind(this, feedData, 4)} {...feedData} key={"feed-element-" + feedData.id + "-" + data.key}/>
+                              )
+                            )
+                          }
+                        </div>
+                      </div>
+                    )
+                }
+            }
+        );
+
+          console.log(feedNodes);
+
       return (
         <div className="feed-ctr" key="feed-listing">
-          {
-            feedData.map(
-              (data , index) => (
-                <div style={{transitionDelay: ((0.25 + (0.05 * index)) + "s")}} key={"home-element-2"} className={"feed-category-ctr " + (this.props.viewState === 1 || this.props.viewState === 2 ? "" : "hide")} key={"feed-category-element-" + data.key}>
-                  <div className="category-bg">
-                    <div>{"•"}</div>
-                    <div>{"•"}</div>
-                    <div>{"•"}</div>
-                  </div>
-                  <div className="category-name-ctr">
-                    <div className="category-name">{data.key.split("'")[1]}</div>
-                  </div>
-                  <div className="feed-list-ctr">
-                    {
-                      data.value.map(
-                        (feedData) => (
-                          <FeedElement onLike={this.onLike.bind(this, feedData)} onClick={this.selectFeed.bind(this, feedData, 4)} {...feedData} key={"feed-element-" + feedData.id + "-" + data.key}/>
-                        )
-                      )
-                    }
-                  </div>
-                </div>
-              )
-            )
-          }
+          {feedNodes.length === 0
+            ? (<div className="empty-view-ctr">
+                  
+                  <div>{"No Feeds to Display"}</div>
+                </div>)
+            : feedNodes}
           <div className={"feed-detail-ctr " + (this.state.selectedArticle === null ? "hide" : "")}>
             {this.state.selectedArticle === null ? null : <FeedDetail onLike={this.onLike.bind(this, this.state.selectedArticle)} onBackClick={this.selectFeed.bind(this, null, 1)} {...this.state.selectedArticle} />}
           </div>

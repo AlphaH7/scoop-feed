@@ -60,6 +60,13 @@
     }
   }
   .feed-ctr{
+    .empty-view-ctr{
+      height: calc(100vh - 130px);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .feed-detail-ctr{
       position: fixed;
       top: 60px;
