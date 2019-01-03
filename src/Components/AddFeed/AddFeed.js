@@ -42,7 +42,6 @@ export default class AddFeed extends React.Component {
         title: this.state.title
       })
       .then(function(response){
-        console.log('added successfully')
         me.props.updateViewState(1);
       });
   }

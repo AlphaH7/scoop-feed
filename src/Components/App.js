@@ -29,7 +29,6 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log(localStorage.getItem("likedItems"));
     if(localStorage.getItem("likedItems") === null){
       localStorage.setItem('likedItems', '[]');
     }

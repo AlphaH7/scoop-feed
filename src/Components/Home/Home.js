@@ -47,9 +47,7 @@ export default class Home extends React.Component {
   }
 
   onLike(feed, ev) {
-    console.log(ev, feed)
     ev.stopPropagation();
-    console.log(feed);
     var likedItems = JSON.parse(localStorage.getItem("likedItems"));
     if(likedItems.includes(feed.id)){
       var index = likedItems.indexOf(feed.id);
@@ -57,7 +55,6 @@ export default class Home extends React.Component {
     }else{
       likedItems.push(feed.id);
     }
-    console.log(likedItems);
     localStorage.setItem('likedItems', JSON.stringify(likedItems));
     this.updateLikedItemList();
   }
@@ -106,7 +103,6 @@ export default class Home extends React.Component {
             }
         );
 
-          console.log(feedNodes);
 
       return (
         <div className="feed-ctr" key="feed-listing">
