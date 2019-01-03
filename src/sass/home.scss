@@ -86,6 +86,27 @@
           width: 100%;
           background-position: center;
           background-size: cover;
+          position: relative;
+          .like-ctr{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-left: 20px;
+            position: absolute;
+            bottom: 0px;
+            font-weight: bold;
+            right: 0px;
+            background-color: #fafafa;
+            background: linear-gradient(315deg, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0) 100%);
+            .like-icon-ctr{
+              padding: 4px 8px;
+              height: 28px;
+              .app-icon{
+                height: 20px;
+                width: 20px;
+              }
+            }
+          }
         }
         .feed-title{
           text-transform: uppercase;

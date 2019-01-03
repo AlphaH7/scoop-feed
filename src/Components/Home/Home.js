@@ -101,7 +101,7 @@ export default class Home extends React.Component {
             )
           }
           <div className={"feed-detail-ctr " + (this.state.selectedArticle === null ? "hide" : "")}>
-            {this.state.selectedArticle === null ? null : <FeedDetail onBackClick={this.selectFeed.bind(this, null, 1)} {...this.state.selectedArticle} />}
+            {this.state.selectedArticle === null ? null : <FeedDetail onLike={this.onLike.bind(this, this.state.selectedArticle)} onBackClick={this.selectFeed.bind(this, null, 1)} {...this.state.selectedArticle} />}
           </div>
         </div>
       )

@@ -10,6 +10,12 @@ export default function FeedDetail(props) {
           <AppIcons onClick={props.onBackClick} iconCls={"back"}/>
           <div onClick={props.onBackClick}>{"BACK"}</div>
         </div>
+        <div className="like-ctr">
+          <div className="like-count">{props.likes + (props.liked ? 1 : 0)}</div>
+          <div className="like-icon-ctr" onClick={props.onLike}>
+            <AppIcons iconCls={props.liked ? "active-heart" : "heart"} />
+          </div>
+        </div>
       </div>
       <div className="feed-title">{props.title}</div>
       <div className="feed-tag-ctr">
