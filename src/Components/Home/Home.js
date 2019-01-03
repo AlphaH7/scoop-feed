@@ -49,7 +49,7 @@ export default class Home extends React.Component {
           {
             feedData.map(
               (data , index) => (
-                <div style={{transitionDelay: ((0.25 + (0.05 * index)) + "s")}} key={"home-element-2"} className={"feed-category-ctr " + (this.props.viewState === 1 ? "" : "hide")} key={"feed-category-element-" + data.key}>
+                <div style={{transitionDelay: ((0.25 + (0.05 * index)) + "s")}} key={"home-element-2"} className={"feed-category-ctr " + (this.props.viewState === 1 || this.props.viewState === 2 ? "" : "hide")} key={"feed-category-element-" + data.key}>
                   <div className="category-bg">
                     <div>{"•"}</div>
                     <div>{"•"}</div>

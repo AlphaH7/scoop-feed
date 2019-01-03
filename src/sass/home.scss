@@ -90,15 +90,17 @@
           text-transform: uppercase;
           font-size: 1.25rem;
           padding: 10px 10px 5px;
+          color: #89cac6;
         }
         .feed-tag-ctr{
-          padding: 0 10px 10px;
+          padding: 10px 10px 20px;
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
         .feed-description{
           padding: 0 10px;
+          line-height: 1.2rem;
         }
       }
     }
@@ -182,6 +184,13 @@
       }
       .feed-date{
         font-size: 0.75rem;
+        padding: 5px 0;
+      }
+      .feed-description{
+        width: 100%;
+        @include multiline-ellipsis(2);
+        font-size: 0.75rem;
+        height: 30px;
       }
     }
   }

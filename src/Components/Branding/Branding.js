@@ -18,7 +18,6 @@ export default function FooterMenu(props) {
            strings={["News","Sports","Automobile","Travel","FEED"]}
            loop={false}
            cursor={false}
-           lifeLike={false}
            nextStringDelay={2000}
            breakLines={false}
            speed={100}

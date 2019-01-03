@@ -1,5 +1,6 @@
 import React from 'react';
 import AppIcons from '../CoreComponents/AppIcons';
+import Moment from 'moment';
 
 export default function FeedDetail(props) {
    return (
@@ -13,7 +14,7 @@ export default function FeedDetail(props) {
       <div className="feed-title">{props.title}</div>
       <div className="feed-tag-ctr">
         <div className="feed-tag">{props.tags[0].split("'")[1]}</div>
-        <div className="feed-date">{props.created_at}</div>
+        <div className="feed-date">{Moment(props.created_at).format("MMM Do YYYY")}</div>
       </div>
       <div className="feed-description">{props.description}</div>
     </div>
