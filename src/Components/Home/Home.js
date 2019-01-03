@@ -26,7 +26,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`${Constants.BASE_URL}article?id=&author=Alistier_X`)
+    axios.get(`${Constants.BASE_URL}?id=&author=Alistier_X`)
       .then(response => {
         this.setState({
           articles: response.data,
@@ -36,7 +36,6 @@ export default class Home extends React.Component {
   }
 
   selectFeed(selectedFeed , viewState) {
-    console.log(selectedFeed);
     this.props.updateViewState(viewState);
     setTimeout(this.setState({
       selectedArticle: selectedFeed
@@ -83,10 +82,14 @@ export default class Home extends React.Component {
       return [item.tags];
     }),
     featuredFeed = this.state.articles[Math.floor((Math.random() * (this.state.articles.length - 1)) + 1)];
+
+    feedData.sort((a,b)=> a.key.localeCompare(b.key));
+
     return (<div className="home-ctr">
               {
                 this.state.viewState === 0 ? (
                   <div className="full-height full-width loading-ctr">
+                    <Branding key={"home-element-0"}/>
                     <Loader />
                     {"Loading Your Feed"}
                   </div>

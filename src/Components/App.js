@@ -1,6 +1,7 @@
 import React from 'react';
 import FooterMenu from './FooterMenu/FooterMenu';
 import Home from './Home/Home';
+import AddFeed from './AddFeed/AddFeed';
 import '../sass/main.scss';
 
 export default class App extends React.Component {
@@ -17,6 +18,9 @@ export default class App extends React.Component {
       switch(this.state.viewState) {
                   case 2:
                       ui = (<Home updateViewState={this.updateViewState} viewState={this.state.viewState}/>);
+                      break;
+                  case 3:
+                      ui = (<AddFeed updateViewState={this.updateViewState} viewState={this.state.viewState}/>);
                       break;
                   default:
                       ui = (<Home updateViewState={this.updateViewState} viewState={this.state.viewState}/>);
