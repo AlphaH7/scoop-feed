@@ -28,6 +28,13 @@ export default class App extends React.Component {
      return ui;
   }
 
+  componentDidMount() {
+    console.log(localStorage.getItem("likedItems"));
+    if(localStorage.getItem("likedItems") === null){
+      localStorage.setItem('likedItems', '[]');
+    }
+  }
+
   updateViewState(viewState) {
     this.setState({
       viewState: viewState

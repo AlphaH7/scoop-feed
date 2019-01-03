@@ -14,7 +14,8 @@ export default class Home extends React.Component {
     this.state = {
       viewState : 0,
       articles : [],
-      selectedArticle: null
+      selectedArticle: null,
+      featuredFeed: null
     }
     this.updateViewState = this.updateViewState.bind(this);
   }
@@ -28,10 +29,12 @@ export default class Home extends React.Component {
   componentDidMount() {
     axios.get(`${Constants.BASE_URL}?id=&author=Alistier_X`)
       .then(response => {
+        var featuredFeed = response.data[Math.floor((Math.random() * (response.data.length - 1)) + 1)];
         this.setState({
           articles: response.data,
-          viewState: 1
-        });
+          viewState: 1,
+          featuredFeed: featuredFeed
+        }, this.updateLikedItemList);
       });
   }
 
@@ -42,9 +45,36 @@ export default class Home extends React.Component {
     }), ((1 + (this.state.articles.length * 0.05)) * 1000))
   }
 
+  onLike(feed, ev) {
+    console.log(ev, feed)
+    ev.stopPropagation();
+    console.log(feed);
+    var likedItems = JSON.parse(localStorage.getItem("likedItems"));
+    if(likedItems.includes(feed.id)){
+      var index = likedItems.indexOf(feed.id);
+      likedItems.splice(index, 1);
+    }else{
+      likedItems.push(feed.id);
+    }
+    console.log(likedItems);
+    localStorage.setItem('likedItems', JSON.stringify(likedItems));
+    this.updateLikedItemList();
+  }
+
+  updateLikedItemList() {
+    var items = this.state.articles;
+    var likedItems = JSON.parse(localStorage.getItem("likedItems"));
+    items.forEach((data)=> {
+        data["liked"] = likedItems.indexOf(data.id) !== -1 ? true : false;
+    });
+    this.setState({
+      articles: items
+    });
+  }
+
   renderFeedData(feedData) {
       return (
-        <div className="feed-ctr">
+        <div className="feed-ctr" key="feed-listing">
           {
             feedData.map(
               (data , index) => (
@@ -61,7 +91,7 @@ export default class Home extends React.Component {
                     {
                       data.value.map(
                         (feedData) => (
-                          <FeedElement onClick={this.selectFeed.bind(this, feedData, 4)} {...feedData} key={"feed-element-" + feedData.id + "-" + data.key}/>
+                          <FeedElement onLike={this.onLike.bind(this, feedData)} onClick={this.selectFeed.bind(this, feedData, 4)} {...feedData} key={"feed-element-" + feedData.id + "-" + data.key}/>
                         )
                       )
                     }
@@ -80,8 +110,7 @@ export default class Home extends React.Component {
   render() {
     var feedData = AppHelper.groupBy(this.state.articles, function(item){
       return [item.tags];
-    }),
-    featuredFeed = this.state.articles[Math.floor((Math.random() * (this.state.articles.length - 1)) + 1)];
+    });
 
     feedData.sort((a,b)=> a.key.localeCompare(b.key));
 
@@ -95,7 +124,7 @@ export default class Home extends React.Component {
                   </div>
                 ) : (
                   [ (<Branding key={"home-element-0"}/>),
-                    ((this.props.viewState === 1 ||this.props.viewState === 4) ? <HomeHeader onClick={this.selectFeed.bind(this, featuredFeed, 4)} ctrCls={this.props.viewState === 4 ? "hide" : ""} key={"home-element-1"} featuredFeed={featuredFeed} /> : null),
+                    ((this.props.viewState === 1 ||this.props.viewState === 4) ? <HomeHeader onClick={this.selectFeed.bind(this, this.state.featuredFeed, 4)} ctrCls={this.props.viewState === 4 ? "hide" : ""} key={"home-element-1"} featuredFeed={this.state.featuredFeed} /> : null),
                     (this.renderFeedData(feedData))
                   ]
                 )
