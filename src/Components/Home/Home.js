@@ -7,6 +7,7 @@ import HomeHeader from './HomeHeader';
 import Branding from '../Branding/Branding';
 import Constants from '../../core-utils/Constants'
 import AppHelper from '../../core-utils/AppHelpers'
+import AppIcons from '../CoreComponents/AppIcons';
 
 export default class Home extends React.Component {
   constructor() {
@@ -111,7 +112,7 @@ export default class Home extends React.Component {
         <div className="feed-ctr" key="feed-listing">
           {feedNodes.length === 0
             ? (<div className="empty-view-ctr">
-                  
+                  <AppIcons iconCls={this.props.viewState === 2 ? "heart-bone" : "not-found"}/>
                   <div>{"No Feeds to Display"}</div>
                 </div>)
             : feedNodes}
