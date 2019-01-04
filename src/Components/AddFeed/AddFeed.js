@@ -53,16 +53,16 @@ export default class AddFeed extends React.Component {
         <div className="feed-heading">{"ADD FEED"}</div>
         <form className="form-ctr" onSubmit={this.handleSubmit}>
           <div className="input-ctr">
-              <input disabled={this.state.addingFeed} placeHolder='Title' value={this.state.title} onChange={this.handleChange.bind(null, "title")} />
+              <input disabled={this.state.addingFeed} placeholder='Title' value={this.state.title} onChange={this.handleChange.bind(null, "title")} />
           </div>
           <div className="input-ctr">
-              <textarea disabled={this.state.addingFeed} rows={10} placeHolder='Description' value={this.state.description} onChange={this.handleChange.bind(null, "description")} />
+              <textarea disabled={this.state.addingFeed} rows={10} placeholder='Description' value={this.state.description} onChange={this.handleChange.bind(null, "description")} />
           </div>
           <div className="input-ctr">
-              <input disabled={this.state.addingFeed} placeHolder='Tags' value={this.state.tags} onChange={this.handleChange.bind(null, "tags")} />
+              <input disabled={this.state.addingFeed} placeholder='Tags' value={this.state.tags} onChange={this.handleChange.bind(null, "tags")} />
           </div>
           <div className="input-ctr">
-              <input disabled={this.state.addingFeed} placeHolder='Image URL (Only)' value={this.state.imageURL} onChange={this.handleChange.bind(null, "imageURL")} />
+              <input disabled={this.state.addingFeed} placeholder='Image URL (Only)' value={this.state.imageURL} onChange={this.handleChange.bind(null, "imageURL")} />
           </div>
           <input disabled={this.state.addingFeed} className="app-button" type="submit" value={!this.state.addingFeed ? "Add Feed" : "Adding Feed"} />
         </form>

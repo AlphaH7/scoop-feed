@@ -31,8 +31,11 @@ export default class Home extends React.Component {
     axios.get(`${Constants.BASE_URL}?id=&author=Alistier_X`)
       .then(response => {
         var featuredFeed = response.data[Math.floor((Math.random() * (response.data.length - 1)) + 1)];
+        var feedData = AppHelper.groupBy(response.data, function(item){return [item.tags];});
+        feedData.sort((a,b)=> a.key.localeCompare(b.key));
         this.setState({
           articles: response.data,
+          groupedArticles: feedData,
           viewState: 1,
           featuredFeed: featuredFeed
         }, this.updateLikedItemList);
@@ -41,11 +44,12 @@ export default class Home extends React.Component {
 
   selectFeed(selectedFeed , viewState) {
     this.props.updateViewState(viewState);
-    setTimeout(this.setState({
-      selectedArticle: selectedFeed
-    }), ((0.25 + (this.state.articles.length * 0.05)) * 1000))
-    console.log(this.state , selectedFeed, viewState);
-    console.log(((0.25 + (this.state.articles.length * 0.05)) * 1000));
+    var me = this;
+    setTimeout(function(){
+      me.setState({
+        selectedArticle: selectedFeed
+      })
+    }, ((0.25 + ((this.state.groupedArticles.length - 1) * 0.05)) * 1000));
   }
 
   onLike(feed, ev) {
@@ -72,15 +76,14 @@ export default class Home extends React.Component {
     });
   }
 
-  renderFeedData(feedData) {
+  renderFeedData() {
       var feedNodes = [];
 
-      feedData.forEach(
+      this.state.groupedArticles.forEach(
           (data , index) => {
             var filteredFeedData = data.value.filter((info)=>(
               this.props.viewState === 2 ? info.liked : true
             ));
-            console.log(0.25 + (0.05 * index), index);
             if(([1,2,4].indexOf(this.props.viewState) !== -1) && (filteredFeedData.length !== 0)){
               feedNodes.push( <div style={{transitionDelay: ((0.25 + (0.05 * index)) + "s")}} key={"home-element-2"} className={"feed-category-ctr " + (this.props.viewState === 1 || this.props.viewState === 2 ? "" : "hide")} key={"feed-category-element-" + data.key}>
                         <div className="category-bg">
@@ -123,9 +126,6 @@ export default class Home extends React.Component {
   }
 
   render() {
-    var feedData = AppHelper.groupBy(this.state.articles, function(item){return [item.tags];});
-
-    feedData.sort((a,b)=> a.key.localeCompare(b.key));
 
     return (<div className="home-ctr">
               {
@@ -138,7 +138,7 @@ export default class Home extends React.Component {
                 ) : (
                   [ (<Branding key={"home-element-0"}/>),
                     ((this.props.viewState === 1 ||this.props.viewState === 4) ? <HomeHeader onClick={this.selectFeed.bind(this, this.state.featuredFeed, 4)} ctrCls={this.props.viewState === 4 ? "hide" : ""} key={"home-element-1"} featuredFeed={this.state.featuredFeed} /> : null),
-                    (this.renderFeedData(feedData))
+                    (this.renderFeedData())
                   ]
                 )
               }
