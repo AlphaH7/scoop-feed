@@ -43,7 +43,9 @@ export default class Home extends React.Component {
     this.props.updateViewState(viewState);
     setTimeout(this.setState({
       selectedArticle: selectedFeed
-    }), ((1 + (this.state.articles.length * 0.05)) * 1000))
+    }), ((0.25 + (this.state.articles.length * 0.05)) * 1000))
+    console.log(this.state , selectedFeed, viewState);
+    console.log(((0.25 + (this.state.articles.length * 0.05)) * 1000));
   }
 
   onLike(feed, ev) {
@@ -78,7 +80,8 @@ export default class Home extends React.Component {
             var filteredFeedData = data.value.filter((info)=>(
               this.props.viewState === 2 ? info.liked : true
             ));
-            if(this.props.viewState === 1 || (this.props.viewState === 2 && filteredFeedData.length !== 0)){
+            console.log(0.25 + (0.05 * index), index);
+            if(([1,2,4].indexOf(this.props.viewState) !== -1) && (filteredFeedData.length !== 0)){
               feedNodes.push( <div style={{transitionDelay: ((0.25 + (0.05 * index)) + "s")}} key={"home-element-2"} className={"feed-category-ctr " + (this.props.viewState === 1 || this.props.viewState === 2 ? "" : "hide")} key={"feed-category-element-" + data.key}>
                         <div className="category-bg">
                           <div>{"•"}</div>
@@ -120,9 +123,7 @@ export default class Home extends React.Component {
   }
 
   render() {
-    var feedData = AppHelper.groupBy(this.state.articles, function(item){
-      return [item.tags];
-    });
+    var feedData = AppHelper.groupBy(this.state.articles, function(item){return [item.tags];});
 
     feedData.sort((a,b)=> a.key.localeCompare(b.key));
 
